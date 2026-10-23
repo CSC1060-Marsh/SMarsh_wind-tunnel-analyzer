@@ -35,6 +35,8 @@ def main():
     # a target lift coefficient using solve_alpha(...).
     # Print the result to the console.
 
+    solution = solve_alpha(cl0, lift_slope, target_cl)
+
     plt.show()
 
 

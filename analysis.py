@@ -65,3 +65,13 @@ def print_lift_summary(alpha, cl0=0.10, lift_slope=0.11):
 #     solve_alpha(...)
 #
 # This feature has not been implemented yet.
+
+def residual(alpha, cl0, lift_slope, target_cl):
+
+    residualNumber = compute_cl(alpha,cl0,lift_slope) - target_cl
+
+    return residualNumber
+
+def solve_alpha(cl0,lift_slope,target_cl):
+    solution = fsolve(residual,0,args=(cl0,lift_slope,target_cl)
+    return solution
