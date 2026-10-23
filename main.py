@@ -8,7 +8,6 @@ and evaluates the current linear lift model. If the angle-of-attack solver
 has been implemented in analysis.py, the script will also compute the
 angle of attack required to achieve a target lift coefficient.
 """
-
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -17,7 +16,7 @@ import pandas as pd
 from analysis import compute_cl, solve_alpha
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_FILE = BASE_DIR / "data" / "test.csv"
+DATA_FILE = BASE_DIR / "data" / "test1.csv"
 
 def main():
     """Run the Wind Tunnel Analyzer workflow."""
@@ -27,7 +26,7 @@ def main():
 
     df = load_data(DATA_FILE)
     print_data_summary(df)
-    plot_lift_curve(df)
+    plot_lift_curve(df,cl0,lift_slope)
     plot_drag_curve(df)
 
     # TODO:
@@ -35,8 +34,10 @@ def main():
     # a target lift coefficient using solve_alpha(...).
     # Print the result to the console.
 
-    solution = solve_alpha(cl0, lift_slope, target_cl)
+    target_cl = 1.2 #Chosen by user
 
+    solution = solve_alpha(cl0, lift_slope, target_cl)
+    print("Required Angle of Attack:",solution)
     plt.show()
 
 
@@ -76,7 +77,7 @@ def print_data_summary(df):
     print()
 
 
-def plot_lift_curve(df, cl0=CL0, lift_slope=LIFT_SLOPE):
+def plot_lift_curve(df, cl0, lift_slope):
     """Plot experimental CL vs alpha data and overlay the linear lift model."""
     alpha_data = df["alpha_deg"]
     cl_data = df["cl"]

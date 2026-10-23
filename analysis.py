@@ -73,5 +73,5 @@ def residual(alpha, cl0, lift_slope, target_cl):
     return residualNumber
 
 def solve_alpha(cl0,lift_slope,target_cl):
-    solution = fsolve(residual,0,args=(cl0,lift_slope,target_cl)
-    return solution
+    solution = fsolve(residual,0,args=(cl0,lift_slope,target_cl))
+    return solution[0]
